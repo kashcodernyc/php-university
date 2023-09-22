@@ -1,5 +1,9 @@
 <?php
 get_header();
+pageBanner(array(
+    'title' => 'Past Events',
+    'subtitle' => 'This page displays out past events.'
+));
 ?>
 <div class="page-banner">
     <div class="page-banner__bg-image" style="background-image: url(<?php echo get_theme_file_uri('/images/library-hero.jpg'); ?>)"></div>
