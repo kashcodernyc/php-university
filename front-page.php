@@ -42,7 +42,7 @@ get_header();
             while ($homePageEvents->have_posts()) {
                 $homePageEvents->the_post(); ?>
                 <div class="event-summary">
-                    <a class="event-summary__date event-summary__date--beige t-center" href="<?php the_permalink(); ?>">
+                    <a class="event-summary__date t-center" href="<?php the_permalink(); ?>">
                         <span class="event-summary__month"><?php
                                                             $eventDate = new DateTime(get_field('event_date'));
                                                             echo $eventDate->format('M');
