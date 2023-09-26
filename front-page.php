@@ -15,12 +15,6 @@ get_header();
     <div class="full-width-split__one">
         <div class="full-width-split__inner">
             <h2 class="headline headline--small-plus t-center">Upcoming Events</h2>
-            <p class="t-center no-margin"><a href="<?php echo get_post_type_archive_link('event'); ?>" class="btn btn--blue">View All Events</a></p>
-        </div>
-    </div>
-    <div class="full-width-split__two">
-        <div class="full-width-split__inner">
-            <h2 class="headline headline--small-plus t-center">From Our Blogs</h2>
             <?php
             $homePageEvents = new WP_Query(array(
                 'posts_per_page' => 2,
@@ -40,9 +34,26 @@ get_header();
             ));
 
             while ($homePageEvents->have_posts()) {
-                $homePageEvents->the_post(); ?>
+                $homePageEvents->the_post();
+                get_template_part('template-parts/content', 'event');
+            }
+            wp_reset_postdata();
+            ?>
+            <p class="t-center no-margin"><a href="<?php echo get_post_type_archive_link('event'); ?>" class="btn btn--blue">View All Events</a></p>
+        </div>
+    </div>
+    <div class="full-width-split__two">
+        <div class="full-width-split__inner">
+            <h2 class="headline headline--small-plus t-center">From Our Blogs</h2>
+            <?php
+            $homePagePosts = new WP_Query(array(
+                'posts_per_page' => 2,
+            ));
+
+            while ($homePagePosts->have_posts()) {
+                $homePagePosts->the_post(); ?>
                 <div class="event-summary">
-                    <a class="event-summary__date t-center" href="<?php the_permalink(); ?>">
+                    <a class="event-summary__date event-summary__date--beige t-center" href="<?php the_permalink(); ?>">
                         <span class="event-summary__month"><?php
                                                             $eventDate = new DateTime(get_field('event_date'));
                                                             echo $eventDate->format('M');
@@ -59,12 +70,13 @@ get_header();
                     </div>
                 </div>
             <?php }
-            wp_reset_postdata();
             ?>
 
             <p class="t-center no-margin"><a href="<?php echo site_url('/blog') ?>" class="btn btn--yellow">View All Blog Posts</a></p>
         </div>
     </div>
+</div>
+
 </div>
 
 <div class="hero-slider">
