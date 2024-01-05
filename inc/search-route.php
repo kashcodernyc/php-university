@@ -81,7 +81,7 @@ function universitySearchResults($data)
 
         $programRelationshipQuery = new WP_Query(
             array(
-                'post_type' => 'professor',
+                'post_type' => array('event', 'professor'),
                 'meta_query' => $programsMetaQuery
             )
         );
@@ -95,9 +95,23 @@ function universitySearchResults($data)
                     'image' => get_the_post_thumbnail_url(0, 'professorLandscape')
                 ));
             }
+            if (get_post_type() === 'event') {
+                $eventDate = new DateTime(get_field('event_date'));
+                $content = has_excerpt() ?  get_the_excerpt() :
+                    wp_trim_words(get_the_content(), 18);
+
+                array_push($results['events'], array(
+                    'title' => get_the_title(),
+                    'permalink' => get_the_permalink(),
+                    'month' => $eventDate->format('M'),
+                    'day' => $eventDate->format('d'),
+                    'content' => $content
+                ));
+            }
         }
 
         $results['professors'] = array_values(array_unique($results['professors'], SORT_REGULAR));
+        $results['events'] = array_values(array_unique($results['events'], SORT_REGULAR));
     }
 
     return $results;

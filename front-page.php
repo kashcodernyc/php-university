@@ -16,6 +16,7 @@ get_header();
         <div class="full-width-split__inner">
             <h2 class="headline headline--small-plus t-center">Upcoming Events</h2>
             <?php
+            $today = date('Y-m-d');
             $homePageEvents = new WP_Query(array(
                 'posts_per_page' => 2,
                 'post_type' => 'event',
@@ -80,39 +81,58 @@ get_header();
 </div>
 
 <div class="hero-slider">
-    <div data-glide-el="track" class="glide__track">
-        <div class="glide__slides">
-            <div class="hero-slider__slide" style="background-image: url(<?php echo get_theme_file_uri('images/bus.jpg'); ?>)">
-                <div class="hero-slider__interior container">
-                    <div class="hero-slider__overlay">
-                        <h2 class="headline headline--medium t-center">Free Transportation</h2>
-                        <p class="t-center">All students have free unlimited bus fare.</p>
-                        <p class="t-center no-margin"><a href="#" class="btn btn--blue">Learn more</a></p>
+    <div class="glide">
+        <div class="glide__track" data-glide-el="track">
+            <ul class="glide__slides">
+                <li class="glide__slide" style="background-image: url(<?php echo get_theme_file_uri('images/bus.jpg'); ?>)">
+                    <div class=" hero-slider__interior container">
+                        <div class="hero-slider__overlay">
+                            <h2 class="headline headline--medium t-center">Free Transportation</h2>
+                            <p class="t-center">All students have free unlimited bus fare.</p>
+                            <p class="t-center no-margin"><a href="#" class="btn btn--blue">Learn more</a></p>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="hero-slider__slide" style="background-image: url(<?php echo get_theme_file_uri('images/apples.jpg'); ?>)">
-                <div class="hero-slider__interior container">
-                    <div class="hero-slider__overlay">
-                        <h2 class="headline headline--medium t-center">An Apple a Day</h2>
-                        <p class="t-center">Our dentistry program recommends eating apples.</p>
-                        <p class="t-center no-margin"><a href="#" class="btn btn--blue">Learn more</a></p>
+                </li>
+                <li class="glide__slide" style="background-image: url(<?php echo get_theme_file_uri('images/apples.jpg'); ?>)">
+                    <div class="hero-slider__interior container">
+                        <div class="hero-slider__overlay">
+                            <h2 class="headline headline--medium t-center">An Apple a Day</h2>
+                            <p class="t-center">Our dentistry program recommends eating apples.</p>
+                            <p class="t-center no-margin"><a href="#" class="btn btn--blue">Learn more</a></p>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="hero-slider__slide" style="background-image: url(<?php echo get_theme_file_uri('images/bread.jpg'); ?>)">
-                <div class="hero-slider__interior container">
-                    <div class="hero-slider__overlay">
-                        <h2 class="headline headline--medium t-center">Free Food</h2>
-                        <p class="t-center">Fictional University offers lunch plans for those in need.</p>
-                        <p class="t-center no-margin"><a href="#" class="btn btn--blue">Learn more</a></p>
+                </li>
+                <li class="glide__slide" style="background-image: url(<?php echo get_theme_file_uri('images/bread.jpg'); ?>)">
+                    <div class="hero-slider__interior container">
+                        <div class="hero-slider__overlay">
+                            <h2 class="headline headline--medium t-center">Free Food</h2>
+                            <p class="t-center">Fictional University offers lunch plans for those in need.</p>
+                            <p class="t-center no-margin"><a href="#" class="btn btn--blue">Learn more</a></p>
+                        </div>
                     </div>
-                </div>
-            </div>
+                </li>
+            </ul>
         </div>
-        <div class="slider__bullets glide__bullets" data-glide-el="controls[nav]"></div>
+
+        <div class="glide__bullets" data-glide-el="controls[nav]">
+            <button class="glide__bullet" data-glide-dir="=0"></button>
+            <button class="glide__bullet" data-glide-dir="=1"></button>
+            <button class="glide__bullet" data-glide-dir="=2"></button>
+        </div>
     </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const config = {
+            type: "carousel",
+            perView: 1,
+            autoplay: 3000,
+        };
+
+        new Glide(".glide", config).mount();
+    });
+</script>
+
 <?php
 get_footer();
 ?>
